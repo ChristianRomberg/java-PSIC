@@ -5,12 +5,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
 
-public class BloomFilterTypeAdapterTest {
+public class BloomFilterJsonAdapterTest {
 
     @Test
     public void testBloomFilterTypeAdapter() {
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(BloomFilter.class, new BloomFilterTypeAdapter())
+                .registerTypeAdapter(BloomFilter.class, new BloomFilterJsonAdapter())
+                .registerTypeAdapter(byte[].class, new Base64JsonAdapter())
                 .create();
 
         BloomFilter bloomFilter = new BloomFilter(0.01, 100);
