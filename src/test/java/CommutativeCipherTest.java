@@ -19,26 +19,24 @@ public class CommutativeCipherTest {
      */
     @Test
     public void testCommutativeCipher() {
-        byte[] privateKeyBytesA = new byte[32];
-        byte[] privateKeyBytesB = new byte[32];
+        byte[] privateKeyA = new byte[32];
+        byte[] privateKeyB = new byte[32];
         byte[] originalData = new byte[32];
 
         // fix the seed for reproducible values
         Random random = new Random();
 
         // generate the random keys
-        random.nextBytes(privateKeyBytesA);
-        random.nextBytes(privateKeyBytesB);
+        random.nextBytes(privateKeyA);
+        random.nextBytes(privateKeyB);
 
         // generate the random input data
         random.nextBytes(originalData);
 
         // create a cipher with the first key
-        BigInteger privateKeyA = new BigInteger(privateKeyBytesA);
         ECCommutativeCipher cipherA = new ECCommutativeCipher(privateKeyA);
 
         // create a cipher with the second key
-        BigInteger privateKeyB = new BigInteger(privateKeyBytesB);
         ECCommutativeCipher cipherB = new ECCommutativeCipher(privateKeyB);
 
         // calculate the first part of the equation

@@ -28,12 +28,16 @@ public class ECCommutativeCipher {
     private final BigInteger curveA;
     private final BigInteger curveB;
 
+    public ECCommutativeCipher(byte[] privateKey) {
+        this(BigIntegers.fromUnsignedByteArray(privateKey));
+    }
+
     public ECCommutativeCipher(BigInteger privateKey) {
         String algorithm = "prime256v1";
         ECNamedCurveParameterSpec parameterSpec = ECNamedCurveTable.getParameterSpec(algorithm);
 
         // store the private key and inverse private key
-        this.privateKey = privateKey;
+        this.privateKey = privateKey.mod(parameterSpec.getN());
         this.inversePrivateKey = privateKey.modInverse(parameterSpec.getN());
 
         // get and store all the curve parameters
@@ -157,7 +161,7 @@ public class ECCommutativeCipher {
         int iter_count = (int) Math.ceil((output_bit_length) / (float) hash_output_length);
 
         if (iter_count * hash_output_length >= 130048)
-            throw new RuntimeException(
+            throw new IllegalArgumentException(
                     "The domain bit length must not be greater than " +
                             "130048. Desired bit length: " + output_bit_length);
 
