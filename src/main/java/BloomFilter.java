@@ -6,6 +6,21 @@ import java.math.BigInteger;
 public class BloomFilter {
 
     /**
+     * Returns the number of hash functions used in this bloom filter
+     */
+    public int getNumberOfHashFunctions() {
+        return nHashFunctions;
+    }
+
+    /**
+     * Returns the backing bytes of this bloom filter. Note that this is not
+     * a deep copy; Any changed made to this array will affect the filter.
+     */
+    public byte[] getBackingBytes() {
+        return bytes;
+    }
+
+    /**
      * The number of hash functions used in this bloom filter
      */
     private final int nHashFunctions;
