@@ -2,7 +2,6 @@ import java.security.SecureRandom;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
 public class Client {
     private final ECCommutativeCipher commutativeCipher;
 

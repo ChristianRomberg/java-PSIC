@@ -30,7 +30,6 @@ public class BloomFilter {
      */
     private final byte[] bytes;
 
-
     /**
      * Calculate the number of bits required to archive the given falsePositiveRate with the given number of elements.
      * Formula taken from Wikipedia:
@@ -57,7 +56,6 @@ public class BloomFilter {
 
         return (int) Math.round(numBits / (double) maxElements * Math.log(2));
     }
-
 
     /**
      * Creates a new BloomFilter with the given falsePositiveRate and the number of elements expected to be inserted
@@ -123,7 +121,6 @@ public class BloomFilter {
         SHA256Digest digest = new SHA256Digest();
         byte[] hashResult = new byte[32];
 
-
         // calculate h1 (SHA256(1 | element))
         digest.update((byte) '1');
         digest.update(element, 0, element.length);
@@ -131,14 +128,12 @@ public class BloomFilter {
 
         long h1 = BigIntegers.fromUnsignedByteArray(hashResult).mod(numBitsBigInt).longValue();
 
-
         // calculate h2 (SHA256(2 | element))
         digest.update((byte) '2');
         digest.update(element, 0, element.length);
         digest.doFinal(hashResult, 0);
 
         long h2 = BigIntegers.fromUnsignedByteArray(hashResult).mod(numBitsBigInt).longValue();
-
 
         // Compute the i-th hash function as SHA256(1 | element) + i * SHA256(2 | element)
         // (modulo numBits).

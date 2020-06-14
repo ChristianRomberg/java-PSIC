@@ -4,7 +4,6 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
-
 public class BloomFilterJsonAdapter implements JsonSerializer<BloomFilter>, JsonDeserializer<BloomFilter> {
     public static final String NUM_HASH_FUNCTIONS = "num_hash_functions";
     public static final String BITS = "bits";
